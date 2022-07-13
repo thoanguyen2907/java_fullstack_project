@@ -1,4 +1,4 @@
-package com.example.FullstackProject.student;
+package com.example.FullstackProject.model.base;
 
 public enum Gender {
     MALE,

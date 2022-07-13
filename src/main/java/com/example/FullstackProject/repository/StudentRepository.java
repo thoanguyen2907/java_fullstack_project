@@ -1,5 +1,6 @@
-package com.example.FullstackProject.student;
+package com.example.FullstackProject.repository;
 
+import com.example.FullstackProject.model.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
