@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -25,6 +24,7 @@ public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
 
+
     @Override
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
@@ -34,15 +34,17 @@ public class StudentServiceImpl implements StudentService {
     public void addStudent(Student student) {
         studentRepository.save(student);
     }
+
     @Override
     public void deleteStudent(Long studentID) {
         studentRepository.deleteById(studentID);
     }
+
     @Override
-    public  void uploadImage(MultipartFile file, Student student) throws IOException {
-        String Path_Directory = "/Users/thoanguyen/Downloads/FullstackProject/src/main/resources/static/image";
-        Files.copy(file.getInputStream(), Paths.get(Path_Directory + java.io.File.separator+file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
-        String  fileName = file.getOriginalFilename();
+    public void uploadImage(MultipartFile file, Student student) throws IOException {
+        String Path_Directory = "src/main/resources/images/";
+        Files.copy(file.getInputStream(), Paths.get(Path_Directory + java.io.File.separator + file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
+        String fileName = file.getOriginalFilename();
         student.setImage(fileName);
 
     }
