@@ -35,6 +35,4 @@ public abstract class BaseEntity extends IdBase {
     @Column(name = "modifiedby" )
     @LastModifiedBy
     private String modifiedBy;
-
-
 }
