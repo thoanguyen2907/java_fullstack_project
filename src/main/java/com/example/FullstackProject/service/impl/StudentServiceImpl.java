@@ -23,6 +23,7 @@ import java.util.Optional;
 public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
+    private static final String PATH = "src/main/resources/images/";
 
 
     @Override
@@ -41,12 +42,17 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void uploadImage(MultipartFile file, Student student) throws IOException {
-        String Path_Directory = "src/main/resources/images/";
-        Files.copy(file.getInputStream(), Paths.get(Path_Directory + java.io.File.separator + file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
-        String fileName = file.getOriginalFilename();
-        student.setImage(fileName);
-
+    public void uploadImage(MultipartFile file, Long id) {
+        try {
+            Student student = studentRepository.findById(id).orElseThrow(() -> new IllegalStateException(
+                    "student with id " + id + " does not exist"
+            ));
+            Files.copy(file.getInputStream(), Paths.get(PATH + java.io.File.separator + file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
+            String fileName = file.getOriginalFilename();
+            student.setImage(fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
