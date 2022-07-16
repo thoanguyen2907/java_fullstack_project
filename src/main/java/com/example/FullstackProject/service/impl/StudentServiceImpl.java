@@ -5,8 +5,14 @@ import com.example.FullstackProject.repository.StudentRepository;
 import com.example.FullstackProject.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -28,10 +34,17 @@ public class StudentServiceImpl implements StudentService {
     public void addStudent(Student student) {
         studentRepository.save(student);
     }
-
     @Override
     public void deleteStudent(Long studentID) {
         studentRepository.deleteById(studentID);
+    }
+    @Override
+    public  void uploadImage(MultipartFile file, Student student) throws IOException {
+        String Path_Directory = "/Users/thoanguyen/Downloads/FullstackProject/src/main/resources/static/image";
+        Files.copy(file.getInputStream(), Paths.get(Path_Directory + java.io.File.separator+file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
+        String  fileName = file.getOriginalFilename();
+        student.setImage(fileName);
+
     }
 
     @Override

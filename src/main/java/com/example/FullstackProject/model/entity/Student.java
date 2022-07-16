@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -22,5 +23,5 @@ public class Student extends BaseEntity {
     private String email;
     @Enumerated(EnumType.STRING)
     private Gender gender;
-
+    private String image;
 }
