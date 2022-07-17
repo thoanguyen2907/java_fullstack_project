@@ -17,5 +17,5 @@ public interface StudentService {
 
     void updateStudent(Student studentDetail);
 
-    void uploadImage(MultipartFile file, Long id);
+    void uploadImage(MultipartFile file, Student student);
 }

@@ -42,14 +42,12 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void uploadImage(MultipartFile file, Long id) {
+    public void uploadImage(MultipartFile file, Student student) {
         try {
-            Student student = studentRepository.findById(id).orElseThrow(() -> new IllegalStateException(
-                    "student with id " + id + " does not exist"
-            ));
             Files.copy(file.getInputStream(), Paths.get(PATH + java.io.File.separator + file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
             String fileName = file.getOriginalFilename();
             student.setImage(fileName);
+            studentRepository.save(student);
         } catch (IOException e) {
             e.printStackTrace();
         }
