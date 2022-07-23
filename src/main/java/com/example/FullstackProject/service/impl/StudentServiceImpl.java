@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -24,6 +23,8 @@ import java.util.Optional;
 public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
+    private static final String PATH = "src/main/resources/images/";
+
 
     @Override
     public List<Student> getAllStudents() {
@@ -34,17 +35,22 @@ public class StudentServiceImpl implements StudentService {
     public void addStudent(Student student) {
         studentRepository.save(student);
     }
+
     @Override
     public void deleteStudent(Long studentID) {
         studentRepository.deleteById(studentID);
     }
-    @Override
-    public  void uploadImage(MultipartFile file, Student student) throws IOException {
-        String Path_Directory = "/Users/thoanguyen/Downloads/FullstackProject/src/main/resources/static/image";
-        Files.copy(file.getInputStream(), Paths.get(Path_Directory + java.io.File.separator+file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
-        String  fileName = file.getOriginalFilename();
-        student.setImage(fileName);
 
+    @Override
+    public void uploadImage(MultipartFile file, Student student) {
+        try {
+            Files.copy(file.getInputStream(), Paths.get(PATH + java.io.File.separator + file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
+            String fileName = file.getOriginalFilename();
+            student.setImage(fileName);
+            studentRepository.save(student);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -1,17 +1,12 @@
 package com.example.FullstackProject.api;
 
-import antlr.StringUtils;
 import com.example.FullstackProject.model.entity.Student;
 import com.example.FullstackProject.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 @RestController
@@ -29,9 +24,12 @@ public class StudentController {
     }
 
     @PostMapping("/upload-file")
-    public void uploadImage(@RequestParam("file")MultipartFile file, Student student) throws IOException {
-       studentService.uploadImage(file, student);
-    };
+    public void uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("student") Student student) throws IOException {
+        System.out.println( file);
+        System.out.println(student);
+        studentService.uploadImage(file, student);
+    }
+
     @PostMapping
     public void addStudent(@RequestBody Student student) {
         studentService.addStudent(student);
