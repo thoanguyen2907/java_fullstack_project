@@ -24,7 +24,9 @@ public class StudentController {
     }
 
     @PostMapping("/upload-file")
-    public void uploadImage(@RequestPart("file") MultipartFile file, @RequestPart("student") Student student) throws IOException {
+    public void uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("student") Student student) throws IOException {
+        System.out.println( file);
+        System.out.println(student);
         studentService.uploadImage(file, student);
     }
 

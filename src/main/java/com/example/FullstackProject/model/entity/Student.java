@@ -21,7 +21,6 @@ public class Student extends BaseEntity {
 
     private String name;
     private String email;
-    @Enumerated(EnumType.STRING)
-    private Gender gender;
+    private String gender;
     private String image;
 }
