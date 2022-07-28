@@ -15,5 +15,10 @@ import javax.persistence.Table;
 @Table(name = "product")
 public class Product  extends BaseEntity {
     private String name;
-
+    private String brand;
+    private String category;
+    private String description;
+    private int rating;
+    private int price;
+    private int count_in_stock;
 }

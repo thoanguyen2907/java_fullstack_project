@@ -6,7 +6,6 @@ import com.example.FullstackProject.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,7 +15,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -24,7 +22,6 @@ public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
     private static final String PATH = "src/main/resources/images/";
-
 
     @Override
     public List<Student> getAllStudents() {
