@@ -44,7 +44,6 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRepository.findById(productDetail.getId()).orElseThrow(() -> new IllegalStateException(
                 "product with id " + productDetail.getId() + " does not exist"
         ));
-
         if (productDetail.getName() != null && productDetail.getName().length() > 0 && !Objects.equals(product.getName(), productDetail.getName())) {
             product.setName(productDetail.getName());
         }
@@ -52,13 +51,13 @@ public class ProductServiceImpl implements ProductService {
             product.setCategory(productDetail.getCategory());
         }
         if (productDetail.getBrand() != null && !Objects.equals(productDetail.getBrand(), productDetail.getBrand())) {
-            productDetail.setBrand(productDetail.getBrand());
+            product.setBrand(productDetail.getBrand());
         }
         if (productDetail.getDescription() != null && !Objects.equals(productDetail.getDescription(), productDetail.getDescription())) {
-            productDetail.setDescription(productDetail.getDescription());
+            product.setDescription(productDetail.getDescription());
         }
         if (productDetail.getDescription() != null && !Objects.equals(productDetail.getDescription(), productDetail.getDescription())) {
-            productDetail.setDescription(productDetail.getDescription());
+            product.setDescription(productDetail.getDescription());
         }
         if (productDetail.getCount_in_stock() != 0 && !Objects.equals(productDetail.getCount_in_stock(), productDetail.getCount_in_stock())) {
             productDetail.setCount_in_stock(productDetail.getCount_in_stock());
