@@ -44,14 +44,14 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void deleteCategory(Long categoryID) {
-       List<ProductEntity> productEntityList = productRepository.findAll().stream().forEach(
+       productRepository.findAll().stream().forEach(
                productEntity -> {
                     if(productEntity.getCategory().equals(categoryID)){
                         throw new IllegalStateException("Category contains product! Cant delete");
-                        return;
                     }
                }
        );
+       categoryRepository.deleteById(categoryID);
     }
 
     @Override
