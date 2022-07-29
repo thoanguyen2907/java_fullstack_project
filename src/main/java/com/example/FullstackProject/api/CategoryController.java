@@ -1,13 +1,14 @@
 package com.example.FullstackProject.api;
 
-import com.example.FullstackProject.model.entity.Category;
-import com.example.FullstackProject.model.entity.Product;
+import com.example.FullstackProject.model.entity.CategoryEntity;
+import com.example.FullstackProject.model.request.CategoryRequest;
+import com.example.FullstackProject.model.response.CategoryResponse;
 import com.example.FullstackProject.service.CategoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/v1/category")
@@ -15,16 +16,18 @@ import java.util.Optional;
 public class CategoryController  {
     private  final CategoryService categoryService;
     @GetMapping
-    public List<Category> getAllCategories() {
-        return categoryService.getAllCategories();
+    public ResponseEntity<?> getAllCategories() {
+        List<CategoryResponse> categoryResponses = categoryService.getAllCategories();
+        return ResponseEntity.ok(categoryResponses);
     }
     @GetMapping(path = "{categoryId}")
-    public Optional<Category> getCategoryById(@PathVariable("categoryId") Long categoryID) {
+    public CategoryResponse getCategoryById(@PathVariable("categoryId") Long categoryID) {
         return categoryService.getCategoryById(categoryID);
     }
     @PostMapping
-    public void addCategory(@RequestBody Category category) {
-        categoryService.addCategory(category);
+    public ResponseEntity<?> addCategory(@RequestBody CategoryRequest categoryRequest) {
+       CategoryResponse categoryResponse = categoryService.addCategory(categoryRequest);
+       return  ResponseEntity.ok(categoryResponse);
     }
 
     @DeleteMapping(path = "{categoryId}")
@@ -32,7 +35,8 @@ public class CategoryController  {
         categoryService.deleteCategory(categoryId);
     }
     @PutMapping
-    public void updateCategory(@RequestBody Category categoryDetail) {
-        categoryService.updateCategory(categoryDetail);
+    public ResponseEntity<?> updateCategory(@RequestBody CategoryRequest categoryRequest, @PathVariable Long id) {
+       CategoryResponse categoryResponse = categoryService.updateCategory(categoryRequest, id);
+       return ResponseEntity.ok(categoryResponse);
     }
 }
