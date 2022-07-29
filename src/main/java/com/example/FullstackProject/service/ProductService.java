@@ -1,18 +1,22 @@
 package com.example.FullstackProject.service;
 
-import com.example.FullstackProject.model.entity.Product;
+import com.example.FullstackProject.model.entity.ProductEntity;
+import com.example.FullstackProject.model.request.ProductRequest;
+import com.example.FullstackProject.model.response.ProductResponse;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface ProductService {
-    List<Product> getAllProducts();
+    List<ProductResponse> getAllProducts();
 
-    void addProduct(Product product);
 
-    Optional<Product> getProductById(Long productID);
+    ProductResponse getProductById(Long productID);
 
     void deleteProduct(Long productID);
 
-    void updateProduct(Product productDetail);
+
+    ProductResponse addProduct(ProductRequest productRequest);
+
+    ProductResponse updateProduct(ProductRequest productRequest, Long id);
 }

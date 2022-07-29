@@ -1,12 +1,13 @@
 package com.example.FullstackProject.api;
 
-import com.example.FullstackProject.model.entity.Product;
+import com.example.FullstackProject.model.request.ProductRequest;
+import com.example.FullstackProject.model.response.ProductResponse;
 import com.example.FullstackProject.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/v1/products")
@@ -15,16 +16,21 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping
-    public List<Product> getAllProducts() {
-        return productService.getAllProducts();
+    public ResponseEntity<?> getAllProducts() {
+        List<ProductResponse> productResponses = productService.getAllProducts();
+        return ResponseEntity.ok(productResponses);
     }
+
     @GetMapping(path = "{productId}")
-    public Optional<Product> getProductById(@PathVariable("productId") Long productID) {
-        return productService.getProductById(productID);
+    public ResponseEntity<?> getProductById(@PathVariable("productId") Long productID) {
+        ProductResponse productResponse = productService.getProductById(productID);
+        return ResponseEntity.ok(productResponse);
     }
+
     @PostMapping
-    public void addProduct(@RequestBody Product product) {
-        productService.addProduct(product);
+    public ResponseEntity<?> addProduct(@RequestBody ProductRequest productRequest) {
+        ProductResponse productResponse = productService.addProduct(productRequest);
+        return ResponseEntity.ok(productResponse);
     }
 
     @DeleteMapping(path = "{productId}")
@@ -33,8 +39,9 @@ public class ProductController {
     }
 
     @PutMapping
-    public void updateStudent(@RequestBody Product productDetail) {
-        productService.updateProduct(productDetail);
+    public ResponseEntity<?> updateProduct(@RequestBody ProductRequest productRequest, @PathVariable Long id) {
+        ProductResponse productResponse = productService.updateProduct(productRequest, id);
+        return ResponseEntity.ok(productResponse);
     }
 
 }

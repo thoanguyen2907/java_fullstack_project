@@ -1,17 +1,21 @@
 package com.example.FullstackProject.service;
 
-import com.example.FullstackProject.model.entity.Category;
+import com.example.FullstackProject.model.entity.CategoryEntity;
+import com.example.FullstackProject.model.request.CategoryRequest;
+import com.example.FullstackProject.model.response.CategoryResponse;
+import com.example.FullstackProject.model.response.ProductResponse;
+
 import java.util.List;
-import java.util.Optional;
 
 public interface CategoryService {
-    List<Category> getAllCategories();
+    List<CategoryResponse> getAllCategories();
 
-    void addCategory(Category category);
+    CategoryResponse addCategory(CategoryRequest category);
 
-    Optional<Category> getCategoryById(Long categoryID);
+    CategoryResponse getCategoryById(Long categoryID);
 
-    void deleteCategory(Long categoryID);
+    void deleteCategory(Long categoryID) throws Exception;
 
-    void updateCategory(Category categoryDetail);
+    CategoryResponse updateCategory(CategoryRequest categoryRequest, Long id);
+
 }
