@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 @Service
@@ -43,15 +44,18 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void deleteCategory(Long categoryID) {
-       productRepository.findAll().stream().forEach(
-               productEntity -> {
-                    if(productEntity.getCategory().equals(categoryID)){
-                        throw new IllegalStateException("Category contains product! Cant delete");
-                    }
-               }
-       );
-       categoryRepository.deleteById(categoryID);
+    public void deleteCategory(Long categoryID) throws Exception {
+
+      ProductEntity productEntity =  productRepository.findAll().stream().filter(
+               pro ->
+                   Objects.equals(pro.getCategory(), categoryID))
+                    .findFirst()
+                    .orElse(null);
+                   if(null != productEntity){
+                        throw new Exception("product is existed");
+                   } else {
+                       categoryRepository.deleteById(categoryID);
+                   }
     }
 
     @Override
