@@ -14,7 +14,7 @@ public interface CategoryService {
 
     CategoryResponse getCategoryById(Long categoryID);
 
-    void deleteCategory(Long categoryID);
+    void deleteCategory(Long categoryID) throws Exception;
 
     CategoryResponse updateCategory(CategoryRequest categoryRequest, Long id);
 

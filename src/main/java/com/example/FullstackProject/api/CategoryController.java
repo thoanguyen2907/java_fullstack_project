@@ -31,7 +31,7 @@ public class CategoryController  {
     }
 
     @DeleteMapping(path = "{categoryId}")
-    public void deleteCategory(@PathVariable("categoryId") Long categoryId) {
+    public void deleteCategory(@PathVariable("categoryId") Long categoryId) throws Exception {
         categoryService.deleteCategory(categoryId);
     }
     @PutMapping

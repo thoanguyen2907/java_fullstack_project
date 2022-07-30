@@ -22,6 +22,6 @@ public class ProductEntity extends BaseEntity {
     private int count_in_stock;
     @ManyToOne()
     @JoinColumn(
-            name = "category_id")
+            name = "categoryId")
     private CategoryEntity category;
 }
