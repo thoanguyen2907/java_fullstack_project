@@ -45,17 +45,15 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void deleteCategory(Long categoryID) throws Exception {
-
-      ProductEntity productEntity =  productRepository.findAll().stream().filter(
-               pro ->
-                   Objects.equals(pro.getCategory(), categoryID))
-                    .findFirst()
-                    .orElse(null);
-                   if(null != productEntity){
-                        throw new Exception("product is existed");
-                   } else {
-                       categoryRepository.deleteById(categoryID);
-                   }
+    ProductEntity productEntity =   productRepository.findAll().stream().filter(                        
+       pro -> Objects.equals(pro.getCategory().getId(), categoryID)   )                                
+               .findFirst()                                                                            
+               .orElse(null);                                                                         
+       if (null != productEntity) {                                                                   
+           throw new Exception("product is existed");                                                 
+       }  else {                                                                                      
+           categoryRepository.deleteById(categoryID);                                                 
+       }                                                                                              
     }
 
     @Override
