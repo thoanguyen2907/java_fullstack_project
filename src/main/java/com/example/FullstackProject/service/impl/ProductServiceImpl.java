@@ -65,7 +65,32 @@ public class ProductServiceImpl implements ProductService {
         ProductEntity productEntity = productRepository.findById(productID).orElseThrow(() -> new IllegalStateException(
                 "product with id " + " does not exist"
         ));
+<<<<<<< HEAD
         return Converter.toModel(productEntity, ProductResponse.class);
+=======
+        if (productDetail.getName() != null && productDetail.getName().length() > 0 && !Objects.equals(product.getName(), productDetail.getName())) {
+            product.setName(productDetail.getName());
+        }
+        if (productDetail.getCategory() != null && productDetail.getCategory().length() > 0 && !Objects.equals(productDetail.getCategory(), productDetail.getCategory())){
+            product.setCategory(productDetail.getCategory());
+        }
+        if (productDetail.getBrand() != null && !Objects.equals(productDetail.getBrand(), productDetail.getBrand())) {
+            product.setBrand(productDetail.getBrand());
+        }
+        if (productDetail.getDescription() != null && !Objects.equals(productDetail.getDescription(), productDetail.getDescription())) {
+            product.setDescription(productDetail.getDescription());
+        }
+        if (productDetail.getDescription() != null && !Objects.equals(productDetail.getDescription(), productDetail.getDescription())) {
+            product.setDescription(productDetail.getDescription());
+        }
+        if (productDetail.getCount_in_stock() != 0 && !Objects.equals(productDetail.getCount_in_stock(), productDetail.getCount_in_stock())) {
+            productDetail.setCount_in_stock(productDetail.getCount_in_stock());
+        }
+        if (productDetail.getRating() != 0 && !Objects.equals(productDetail.getRating(), productDetail.getRating())) {
+            productDetail.setRating(productDetail.getRating());
+        }
+        productDetail.setModifiedBy(dateFormat.format(cal.getTime()));
+>>>>>>> 7499377b95062591327ddae2ee4f798fbcf11c98
     }
 
 }
